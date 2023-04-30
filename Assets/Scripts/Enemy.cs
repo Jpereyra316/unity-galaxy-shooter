@@ -8,9 +8,11 @@ public class Enemy : MonoBehaviour
     private float _speed = 4f;
     const float TOP_OF_SCREEN = 7f;
     const float BOTTOM_OF_SCREEN = -5f;
+
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector3(Random.Range(-8f, 8f), TOP_OF_SCREEN, 0);
     }
 
     // Update is called once per frame
@@ -35,7 +37,12 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         } else if (other.tag == "Player")
         {
-            // TODO: Damage the player
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                player.Damage();
+            }
+
             Destroy(this.gameObject);
         }
     }
