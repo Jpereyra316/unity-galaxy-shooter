@@ -7,6 +7,7 @@ TagManager:
   - Laser
   - Enemy
   - Spawn_Manager
+  - Life
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2134614973
+    locked: 0
+  - name: Foreground
+    uniqueID: 4003723301
     locked: 0

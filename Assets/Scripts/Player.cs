@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
     private SpawnManager _spawnManager;
 
+    private GameObject _lifeDisplay;
+
     private float _lastFireTime = -1f;
 
     // Start is called before the first frame update
@@ -81,5 +83,10 @@ public class Player : MonoBehaviour
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
+    }
+
+    public void LifeCollected()
+    {
+        _lives++;
     }
 }
