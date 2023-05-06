@@ -33,7 +33,7 @@ public class SpawnManager : MonoBehaviour
         {
             if(Random.Range(0,6) == 1)
             {
-                Instantiate(_life, spawnPos, Quaternion.identity, _lifeContainer.transform);
+                //Instantiate(_life, spawnPos, Quaternion.identity, _lifeContainer.transform);
             } else
             {
                 Instantiate(_enemy, spawnPos, Quaternion.identity, _enemyContainer.transform);
