@@ -6,20 +6,38 @@ public class Player : MonoBehaviour
 {
     // SerializeField attribute allows private variables to show up on the Unity inspector.
     [SerializeField]
+    private int _lives = 3;
+
+    [SerializeField]
     private float _speed = 3.5f;
 
     [SerializeField]
     private GameObject _laserPrefab;
 
     [SerializeField]
+    private GameObject _tripleShotPrefab;
+
+    [SerializeField]
     private float _fireRate = 0.3f;
 
+    private SpawnManager _spawnManager;
+
+    private GameObject _lifeDisplay;
+
     private float _lastFireTime = -1f;
+
+    private bool _tripleShotActive = true;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
+
+        _spawnManager = GameObject.FindGameObjectWithTag("Spawn_Manager").GetComponent<SpawnManager>();
+        if (_spawnManager == null)
+        {
+            Debug.LogError("The Spawn Manager is null!");
+        }
     }
 
     // Update is called once per frame
@@ -58,6 +76,29 @@ public class Player : MonoBehaviour
     void FireLaser()
     {
         _lastFireTime = Time.time;
-        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+
+        if (_tripleShotActive)
+        {
+            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        } else
+        {
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+        }
+    }
+
+    public void Damage()
+    {
+        _lives--;
+
+        if (_lives < 1)
+        {
+            _spawnManager.OnPlayerDeath();
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void LifeCollected()
+    {
+        _lives++;
     }
 }
