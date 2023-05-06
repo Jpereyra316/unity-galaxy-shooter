@@ -11,6 +11,9 @@ public class SpawnManager : MonoBehaviour
     private GameObject _life;
 
     [SerializeField]
+    private GameObject _tripleShot;
+
+    [SerializeField]
     private GameObject _enemyContainer;
 
     [SerializeField]
@@ -23,22 +26,27 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnRoutine());
+        StartCoroutine(SpawnEnemyRoutine());
+        StartCoroutine(SpawnPowerupRoutine());
     }
 
-    IEnumerator SpawnRoutine()
+    IEnumerator SpawnEnemyRoutine()
     {
         Vector3 spawnPos = new Vector3(Random.Range(-8f, 8f), TOP_OF_SCREEN);
         while (_continueSpawning)
         {
-            if(Random.Range(0,6) == 1)
-            {
-                //Instantiate(_life, spawnPos, Quaternion.identity, _lifeContainer.transform);
-            } else
-            {
-                Instantiate(_enemy, spawnPos, Quaternion.identity, _enemyContainer.transform);
-            }
+            Instantiate(_enemy, spawnPos, Quaternion.identity, _enemyContainer.transform);
             yield return new WaitForSeconds(Random.Range(1f, 5f));
+        }
+    }
+
+    IEnumerator SpawnPowerupRoutine()
+    {
+        Vector3 spawnPos = new Vector3(Random.Range(-8f, 8f), TOP_OF_SCREEN);
+        while (_continueSpawning)
+        {
+            Instantiate(_tripleShot, spawnPos, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(7f, 10f));
         }
     }
 
