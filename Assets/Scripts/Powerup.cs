@@ -9,6 +9,18 @@ public class Powerup : MonoBehaviour
     const float TOP_OF_SCREEN = 7f;
     const float BOTTOM_OF_SCREEN = -5f;
 
+    public enum PowerUpType
+    {
+        TripleShot,
+        Speed,
+
+        LAST,
+        FIRST = TripleShot
+    };
+
+    [SerializeField]
+    private PowerUpType _powerupType;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +47,20 @@ public class Powerup : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                player.ActivateTripleShot();
+                switch (_powerupType)
+                {
+                    case PowerUpType.TripleShot:
+                        player.ActivateTripleShot();
+                        break;
+
+                    case PowerUpType.Speed:
+                        player.ActivateSpeedPowerup();
+                        break;
+
+                    default:
+                        break;
+
+                }
             }
 
             Destroy(this.gameObject);

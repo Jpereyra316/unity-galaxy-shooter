@@ -8,16 +8,10 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemy;
 
     [SerializeField]
-    private GameObject _life;
-
-    [SerializeField]
-    private GameObject _tripleShot;
+    private GameObject[] _powerUps;
 
     [SerializeField]
     private GameObject _enemyContainer;
-
-    [SerializeField]
-    private GameObject _lifeContainer;
 
     private bool _continueSpawning = true;
 
@@ -45,7 +39,8 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(Random.Range(-8f, 8f), TOP_OF_SCREEN);
         while (_continueSpawning)
         {
-            Instantiate(_tripleShot, spawnPos, Quaternion.identity);
+            int randomPowerUp = Random.Range(((int)Powerup.PowerUpType.FIRST), ((int)Powerup.PowerUpType.LAST));
+            Instantiate(_powerUps[randomPowerUp], spawnPos, Quaternion.identity);
             yield return new WaitForSeconds(Random.Range(7f, 10f));
         }
     }

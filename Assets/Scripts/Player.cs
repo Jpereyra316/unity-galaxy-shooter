@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     private float _speed = 5f;
 
     [SerializeField]
+    private float _speedMultiplier = 2f;
+
+    [SerializeField]
     private GameObject _laserPrefab;
 
     [SerializeField]
@@ -26,8 +29,8 @@ public class Player : MonoBehaviour
 
     private float _lastFireTime = -1f;
 
-    [SerializeField]
     private bool _tripleShotActive = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -109,9 +112,21 @@ public class Player : MonoBehaviour
         StartCoroutine(TripleShotPowerDownRoutine());
     }
 
+    public void ActivateSpeedPowerup()
+    {
+        _speed *= _speedMultiplier;
+        StartCoroutine(SpeedPowerDownRoutine());
+    }
+
     IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5f);
         _tripleShotActive = false;
+    }
+
+    IEnumerator SpeedPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5f);
+        _speed /= _speedMultiplier;
     }
 }
