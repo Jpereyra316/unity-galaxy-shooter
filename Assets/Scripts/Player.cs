@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     private GameObject _tripleShotPrefab;
 
     [SerializeField]
+    private GameObject _shieldVisualizer;
+
+    [SerializeField]
     private float _fireRate = 0.2f;
 
     private SpawnManager _spawnManager;
@@ -94,9 +97,16 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
+        if (_shieldActive)
+        {
+            _shieldActive = false;
+            _shieldVisualizer.SetActive(false);
+            return;
+        }
+
         _lives--;
 
-        if (!_shieldActive && _lives < 1)
+        if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
@@ -123,7 +133,7 @@ public class Player : MonoBehaviour
     public void ActivateShieldPowerup()
     {
         _shieldActive = true;
-        StartCoroutine(ShieldPowerDownRoutine());
+        _shieldVisualizer.SetActive(true);
     }
 
     IEnumerator TripleShotPowerDownRoutine()
@@ -136,11 +146,5 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         _speed /= _speedMultiplier;
-    }
-
-    IEnumerator ShieldPowerDownRoutine()
-    {
-        yield return new WaitForSeconds(5f);
-        _shieldActive = false;
     }
 }
