@@ -13,6 +13,7 @@ public class Powerup : MonoBehaviour
     {
         TripleShot,
         Speed,
+        Shield,
 
         LAST,
         FIRST = TripleShot
@@ -55,6 +56,10 @@ public class Powerup : MonoBehaviour
 
                     case PowerUpType.Speed:
                         player.ActivateSpeedPowerup();
+                        break;
+
+                    case PowerUpType.Shield:
+                        player.ActivateShieldPowerup();
                         break;
 
                     default:

@@ -599,6 +599,7 @@ MonoBehaviour:
   _powerUps:
   - {fileID: 8003061994231209797, guid: 17c9ecc90ee9a8049be774c075238a3e, type: 3}
   - {fileID: 7619122305881752548, guid: 9729fa6227f4c0c4b867a212fb74c220, type: 3}
+  - {fileID: 5370650287329181200, guid: 036cd42d5b0f7ee47bae321224face15, type: 3}
   _enemyContainer: {fileID: 133981082}
 --- !u!4 &2075586237
 Transform:

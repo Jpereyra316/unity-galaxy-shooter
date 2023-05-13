@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
 
     private bool _tripleShotActive = false;
 
+    private bool _shieldActive = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -94,7 +96,7 @@ public class Player : MonoBehaviour
     {
         _lives--;
 
-        if (_lives < 1)
+        if (!_shieldActive && _lives < 1)
         {
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
@@ -118,6 +120,12 @@ public class Player : MonoBehaviour
         StartCoroutine(SpeedPowerDownRoutine());
     }
 
+    public void ActivateShieldPowerup()
+    {
+        _shieldActive = true;
+        StartCoroutine(ShieldPowerDownRoutine());
+    }
+
     IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5f);
@@ -128,5 +136,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         _speed /= _speedMultiplier;
+    }
+
+    IEnumerator ShieldPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5f);
+        _shieldActive = false;
     }
 }
