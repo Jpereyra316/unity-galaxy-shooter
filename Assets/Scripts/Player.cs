@@ -69,18 +69,7 @@ public class Player : MonoBehaviour
             {
                 FireLaser();
             }
-        } else if (Input.GetKeyDown(KeyCode.R))
-        {
-            RestartLevel();
         }
-    }
-
-    void RestartLevel()
-    {
-        _lives = 3;
-        _uiManager.UpdateLives(_lives);
-        _spawnManager.OnLevelRestart();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void CalculateMovement()
@@ -131,7 +120,7 @@ public class Player : MonoBehaviour
         if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
-            transform.position = new Vector3(0, 0, 0);
+            Destroy(this.gameObject);
         }
     }
 
