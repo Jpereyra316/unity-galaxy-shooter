@@ -28,13 +28,15 @@ public class Player : MonoBehaviour
 
     private SpawnManager _spawnManager;
 
-    private GameObject _lifeDisplay;
+    private UIManager _uiManager;
 
     private float _lastFireTime = -1f;
 
     private bool _tripleShotActive = false;
 
     private bool _shieldActive = false;
+
+    private int _score = 0;
 
 
     // Start is called before the first frame update
@@ -46,6 +48,12 @@ public class Player : MonoBehaviour
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is null!");
+        }
+
+        _uiManager = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UIManager>();
+        if (_uiManager == null)
+        {
+            Debug.LogError("The UI Manager is null!");
         }
     }
 
@@ -146,5 +154,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         _speed /= _speedMultiplier;
+    }
+
+    public void IncrementScore(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
     }
 }

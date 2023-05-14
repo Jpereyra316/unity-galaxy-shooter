@@ -9,10 +9,18 @@ public class Enemy : MonoBehaviour
     const float TOP_OF_SCREEN = 7f;
     const float BOTTOM_OF_SCREEN = -5f;
 
+    private Player _player;
+
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(Random.Range(-8f, 8f), TOP_OF_SCREEN, 0);
+
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if ( _player == null )
+        {
+            Debug.LogError("The Player is null for " + this.ToString() + "!");
+        }
     }
 
     // Update is called once per frame
@@ -32,6 +40,8 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
+
+            _player.IncrementScore(10);
             Destroy(this.gameObject);
         } else if (other.tag == "Player")
         {

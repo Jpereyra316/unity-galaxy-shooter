@@ -9,7 +9,7 @@ TagManager:
   - Spawn_Manager
   - Life
   - Triple_Shot
-  - Triple_Shot_Powerup
+  - UI_Manager
   layers:
   - Default
   - TransparentFX
