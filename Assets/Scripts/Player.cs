@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        _lives--;
+        _uiManager.UpdateLives(--_lives);
 
         if (_lives < 1)
         {
@@ -123,7 +123,10 @@ public class Player : MonoBehaviour
 
     public void LifeCollected()
     {
-        _lives++;
+        if (_lives < 3)
+        {
+            _uiManager.UpdateLives(++_lives);
+        }
     }
 
     public void ActivateTripleShot()
