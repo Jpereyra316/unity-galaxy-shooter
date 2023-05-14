@@ -15,13 +15,13 @@ public class UIManager : MonoBehaviour
     private Sprite[] _lifeSprites;
 
     [SerializeField]
-    private GameObject _gameOverText;
+    private Text _gameOverText;
 
     // Start is called before the first frame update
     void Start()
     {
         UpdateScore(0);
-        _gameOverText.SetActive(false);
+        _gameOverText.gameObject.SetActive(false);
     }
 
     public void UpdateScore(int newScore)
@@ -45,6 +45,6 @@ public class UIManager : MonoBehaviour
 
     public void OnGameOver()
     {
-        _gameOverText.SetActive(true);
+        _gameOverText.gameObject.SetActive(true);
     }
 }
