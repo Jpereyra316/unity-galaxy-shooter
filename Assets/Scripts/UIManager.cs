@@ -31,20 +31,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLives(int livesCount)
     {
-        if (livesCount > 3)
-        {
-            _lifeImage.sprite = _lifeSprites[3];
-        } else if (livesCount < 0)
-        {
-            _lifeImage.sprite = _lifeSprites[0];
-        } else
-        {
-            _lifeImage.sprite= _lifeSprites[livesCount];
-        }
-    }
+        _lifeImage.sprite = _lifeSprites[livesCount];
 
-    public void OnGameOver()
-    {
-        _gameOverText.gameObject.SetActive(true);
+        if (livesCount == 0)
+        {
+            _gameOverText.gameObject.SetActive(true);
+        }
     }
 }
