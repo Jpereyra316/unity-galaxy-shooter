@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -38,7 +39,6 @@ public class Player : MonoBehaviour
 
     private int _score = 0;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -60,13 +60,27 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalculateMovement();
-
-        if (Input.GetKeyDown(KeyCode.Space) &&
-            _lastFireTime + _fireRate < Time.time)
+        if (_lives > 0)
         {
-            FireLaser();
+            CalculateMovement();
+
+            if (Input.GetKeyDown(KeyCode.Space) &&
+                _lastFireTime + _fireRate < Time.time)
+            {
+                FireLaser();
+            }
+        } else if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartLevel();
         }
+    }
+
+    void RestartLevel()
+    {
+        _lives = 3;
+        _uiManager.UpdateLives(_lives);
+        _spawnManager.OnLevelRestart();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void CalculateMovement()
@@ -117,7 +131,7 @@ public class Player : MonoBehaviour
         if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
-            Destroy(this.gameObject);
+            transform.position = new Vector3(0, 0, 0);
         }
     }
 

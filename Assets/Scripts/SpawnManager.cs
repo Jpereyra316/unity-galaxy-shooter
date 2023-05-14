@@ -56,4 +56,9 @@ public class SpawnManager : MonoBehaviour
             Destroy(enemy.gameObject);
         }
     }
+
+    public void OnLevelRestart()
+    {
+        _continueSpawning = true;
+    }
 }
