@@ -35,7 +35,16 @@ public class UIManager : MonoBehaviour
 
         if (livesCount == 0)
         {
-            _gameOverText.gameObject.SetActive(true);
+            StartCoroutine(GameOverRoutine());
+        }
+    }
+
+    IEnumerator GameOverRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            _gameOverText.gameObject.SetActive(!_gameOverText.gameObject.activeSelf);
         }
     }
 }
