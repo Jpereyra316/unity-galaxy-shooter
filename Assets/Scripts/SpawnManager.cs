@@ -55,12 +55,5 @@ public class SpawnManager : MonoBehaviour
         {
             Destroy(enemy.gameObject);
         }
-
-        // Clean up the remaining lives
-        Life[] lives = _enemyContainer.GetComponentsInChildren<Life>();
-        foreach (Life life in lives)
-        {
-            Destroy(life.gameObject);
-        }
     }
 }
